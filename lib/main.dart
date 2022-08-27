@@ -43,23 +43,6 @@ class MyApp extends StatelessWidget {
       ),
     );
 
-    Color color = Theme.of(context).primaryColor;
-
-    Widget buttonSection = Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        _buildButtonColumn(color, Icons.usb, 'BUTTON 1'),
-        _buildButtonColumn(color, Icons.usb_off, 'BUTTON 2'),
-      ],
-    );
-
-    Widget buttonConnect = Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: const [
-        ConnectWidget(),
-      ],
-    );
-
     return MaterialApp(
       title: 'command interface demo',
       home: Scaffold(
@@ -68,33 +51,18 @@ class MyApp extends StatelessWidget {
         ),
         body: ListView(
           children: [
-            buttonConnect,
+            ConnectWidget(),
             titleSection,
-            buttonSection,
           ],
         ),
       ),
     );
   }
-
-  Column _buildButtonColumn(Color color, IconData icon, String label) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Icon(icon, color: color),
-        Container(
-          margin: const EdgeInsets.only(top: 8),
-          child: Text(
-            label,
-            style: TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w400,
-              color: color,
-            ),
-          ),
-        ),
-      ],
-    );
-  }
 }
+
+// Widget buttonConnect = Row(
+//   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//   children: const [
+//     ConnectWidget(),
+//   ],
+// );

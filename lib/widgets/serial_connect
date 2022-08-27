@@ -3,7 +3,6 @@ import 'package:command_interface/widgets/js_general';
 
 
 class ConnectWidget extends StatefulWidget {
-  const ConnectWidget({super.key});
 
   @override
   State<ConnectWidget> createState() => _ConnectWidgetState();
