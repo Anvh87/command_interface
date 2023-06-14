@@ -1,68 +1,31 @@
 import 'package:flutter/material.dart';
-import 'widgets/serial_cmd.dart';
+import 'package:provider/provider.dart';
+import 'core/controllers/controller.dart';
+import 'pages/dashboard/dashboard.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  SerialCMD serialCMD = SerialCMD();
-
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Flutter Serial'),
-        ),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Expanded(
-              child: ListView(
-                padding: const EdgeInsets.all(8),
-                children: serialCMD.received.map((e) => Text(e)).toList(),
-              ),
-            ),
-            ElevatedButton(
-              child: const Text('Open Port'),
-              onPressed: () {
-                serialCMD.openPort();
-              },
-            ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-            ),
-            TextField(
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: 'Enter commands',
-                ),
-                onChanged: (text) {
-                  serialCMD.msgBuffer = text;
-                },
-                onEditingComplete: () {
-                  serialCMD.writeToPort();
-                }),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-            ),
-            ElevatedButton(
-              child: const Text('Send'),
-              onPressed: () {
-                serialCMD.writeToPort();
-              },
-            ),
-          ],
-        ),
+      title: 'Command Interface',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (context) => Controller(),)
+        ],
+        child: const DashBoard(),
       ),
     );
   }
 }
+
