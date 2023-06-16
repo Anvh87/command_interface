@@ -1,18 +1,9 @@
 import 'package:flutter/material.dart';
 
-// Colors used in this app
-const primaryColor = Color.fromRGBO(17, 159, 250, 1);
-const secondaryColor = Colors.white;
-const bgColor = Color.fromRGBO(247, 251, 254, 1);
-const textColor = Colors.black;
-const lightTextColor = Colors.black26;
-const transparent = Colors.transparent;
-
-const grey = Color.fromRGBO(148, 170, 220, 1);
-const purple = Color.fromRGBO(165, 80, 179, 1);
-const orange = Color.fromRGBO(251, 137, 13, 1);
-const green = Color.fromRGBO(51, 173, 127, 1);
-const red = Colors.red;
-
-// Default App Padding
-const appPadding = 16.0;
+const primaryColor = Color(0xFF685BFF);
+const canvasColor = Color(0xFF2E2E48);
+const scaffoldBackgroundColor = Color(0xFF464667);
+const accentCanvasColor = Color(0xFF3E3E61);
+const white = Colors.white;
+final actionColor = const Color(0xFF5F5FA7).withOpacity(0.6);
+final divider = Divider(color: white.withOpacity(0.3), height: 1);
