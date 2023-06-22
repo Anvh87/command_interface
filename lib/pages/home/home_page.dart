@@ -7,14 +7,30 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('HomePage'),
+        title: const Text('Home'),
         centerTitle: true,
       ),
-      body: const Center(
-        child: Text(
-          'HomePage is working',
-          style: TextStyle(fontSize: 20),
-        ),
+      body: Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+          const SizedBox(height: 30),
+          ElevatedButton(
+            onPressed: () {},
+            child: const Text('Test1'),
+          ),
+                    const SizedBox(height: 30),
+          ElevatedButton(
+            onPressed: () {},
+            child: const Text('Test2'),
+          ),
+                    const SizedBox(height: 30),
+          ElevatedButton(
+            onPressed: () {},
+            child: const Text('Test3'),
+          ),
+          ]          
+        )
       ),
     );
   }

@@ -1,7 +1,7 @@
+import 'package:command_interface/core/routes/app_routers.dart';
 import 'package:flutter/material.dart';
 // import 'package:provider/provider.dart';
 // import 'core/controllers/controller.dart';
-import 'pages/dashboard/dashboard_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,22 +13,15 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Command Interface',
+      routerConfig: goRouter,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
           useMaterial3: true,
           brightness: Brightness.light,
-          colorSchemeSeed: const Color.fromARGB(255, 14, 112, 151),
+          colorSchemeSeed: Colors.teal,
           ),
-      home: const Center(
-        // providers: [
-        //   ChangeNotifierProvider(
-        //     create: (context) => Controller(),
-        //   )
-        // ],
-        child: DashboardPage(),
-      ),
     );
   }
 }

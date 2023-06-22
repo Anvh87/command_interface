@@ -1,58 +1,111 @@
-import 'dart:html';
-
-import 'package:command_interface/pages/home/home_page.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
-class DashboardPage extends StatefulWidget {
-  const DashboardPage({super.key});
+class DashboardPage extends StatelessWidget {
+  const DashboardPage({
+    Key? key,
+    required this.navigationShell,
+  }) : super(
+            key: key ?? const ValueKey<String>('DashboardPage'));
+  final StatefulNavigationShell navigationShell;
+
+  void _goBranch(int index) {
+    navigationShell.goBranch(
+      index,
+      // A common pattern when using bottom navigation bars is to support
+      // navigating to the initial location when tapping the item that is
+      // already active. This example demonstrates how to support this behavior,
+      // using the initialLocation parameter of goBranch.
+      initialLocation: index == navigationShell.currentIndex,
+    );
+  }
 
   @override
-  State<DashboardPage> createState() => _DashboardPageState();
+  Widget build(BuildContext context) {
+    final size = MediaQuery.sizeOf(context);
+    if (size.width < 600) {
+      return ScaffoldWithBottomNavBar(
+        body: navigationShell,
+        currentIndex: navigationShell.currentIndex,
+        onDestinationSelected: _goBranch,
+      );
+    } else {
+      return ScaffoldWithNavigationRail(
+        body: navigationShell,
+        currentIndex: navigationShell.currentIndex,
+        onDestinationSelected: _goBranch,
+      );
+    }
+  }
 }
 
-class _DashboardPageState extends State<DashboardPage> {
-int _selectedIndex = 0;
-  NavigationRailLabelType labelType = NavigationRailLabelType.all;
-  bool showLeading = false;
-  bool showTrailing = false;
-  double groupAlignment = -1.0;
+class ScaffoldWithBottomNavBar extends StatelessWidget {
+  const ScaffoldWithBottomNavBar({
+    super.key,
+    required this.body,
+    required this.currentIndex,
+    required this.onDestinationSelected,
+  });
+  final Widget body;
+  final int currentIndex;
+  final ValueChanged<int> onDestinationSelected;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: body,
+      bottomNavigationBar: NavigationBar(
+        selectedIndex: currentIndex,
+        destinations: const [
+          NavigationDestination(
+            icon: Icon(Icons.house_outlined),
+            selectedIcon: Icon(Icons.house),
+            label: 'Home',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.precision_manufacturing_outlined),
+            selectedIcon: Icon(Icons.precision_manufacturing),
+            label: 'SP2000',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.water_drop_outlined),
+            selectedIcon: Icon(Icons.water_drop),
+            label: 'Pumps',
+          ),
+        ],
+        onDestinationSelected: onDestinationSelected,
+      ),
+    );
+  }
+}
+
+class ScaffoldWithNavigationRail extends StatelessWidget {
+  const ScaffoldWithNavigationRail({
+    super.key,
+    required this.body,
+    required this.currentIndex,
+    required this.onDestinationSelected,
+  });
+  final Widget body;
+  final int currentIndex;
+  final ValueChanged<int> onDestinationSelected;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Row(
-        children: <Widget>[
+        children: [
           NavigationRail(
-            selectedIndex: _selectedIndex,
-            groupAlignment: groupAlignment,
-            onDestinationSelected: (int index) {
-              setState(() {
-                _selectedIndex = index;
-              });
-            },
-            labelType: labelType,
-            leading: showLeading
-                ? FloatingActionButton(
-                    elevation: 0,
-                    onPressed: () {
-                      // Add your onPressed code here!
-                    },
-                    child: Image.asset('assets/images/Skalar_Logo_White.png'),
-                  )
-                : const SizedBox(),
-            trailing: showTrailing
-                ? IconButton(
-                    onPressed: () {
-                      // Add your onPressed code here!
-                    },
-                    icon: const Icon(Icons.more_horiz_rounded),
-                  )
-                : const SizedBox(),
+            extended: true,
+            selectedIndex: currentIndex,
+            onDestinationSelected: onDestinationSelected,
+            labelType: NavigationRailLabelType.none,
+            leading: Image.asset(width: 200,'assets/images/Skalar_Logo.png'),
             destinations: const <NavigationRailDestination>[
               NavigationRailDestination(
                 icon: Icon(Icons.house_outlined),
                 selectedIcon: Icon(Icons.house),
-                label: Text('Home'),
+                label: Text('Home',),
               ),
               NavigationRailDestination(
                 icon: Icon(Icons.precision_manufacturing_outlined),
@@ -66,13 +119,9 @@ int _selectedIndex = 0;
               ),
             ],
           ),
-          const VerticalDivider(thickness: 1, width: 1),
-          // This is the main content.
+          // const VerticalDivider(thickness: 1, width: 1),
           Expanded(
-            child: IndexedStack(
-              index: _selectedIndex,
-              children: pages,
-            ),
+            child: body,
           ),
         ],
       ),
