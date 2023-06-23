@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:command_interface/core/api/serial_cmd.dart';
 import 'package:command_interface/core/widgets/open_port_button.dart';
 
 class Sp2000Page extends StatelessWidget {

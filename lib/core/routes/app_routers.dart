@@ -2,8 +2,8 @@ import 'package:command_interface/pages/dashboard/dashboard_page.dart';
 import 'package:command_interface/pages/pumps/pumps_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:command_interface/Pages/home/home_page.dart';
-import 'package:command_interface/Pages/sp_2000/sp_2000_page.dart';
+import 'package:command_interface/pages/home/home_page.dart';
+import 'package:command_interface/pages/sp_2000/sp_2000_page.dart';
 
 // private navigators
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
