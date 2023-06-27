@@ -13,48 +13,45 @@ class SerialTextWindow extends StatefulWidget {
 class _SerialTextWindowState extends State<SerialTextWindow> {
   SerialCMD serialCMD = SerialCMD();
 
-  final TextEditingController msgController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Card(
-        child: Flexible(
-          child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              children: [
-                const Text(
-                  'Serial Text Window',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w500,
-                  ), //Textstyle
-                ), //Text
-                Expanded(
-                  child: ListView(
-                    padding: const EdgeInsets.all(8),
-                    children: serialCMD.received.map((e) => Text(e)).toList(),
-                  ),
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            children: [
+              const Text(
+                'Serial Text Window',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w500,
+                ), //Textstyle
+              ), //Text
+              Expanded(
+                child: ListView(
+                  padding: const EdgeInsets.all(8),
+                  children: serialCMD.received.map((e) => Text(e)).toList(),
                 ),
-                TextField(
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: 'Enter commands',
-                  ),
-                  onSubmitted: (text) {
-                    serialCMD.msgBuffer = text;
-                  },
-                  onEditingComplete: () {
-                    serialCMD.writeToPort();
-                    msgController.clear();
-                  },
+              ),
+              TextField(
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: 'Enter commands',
                 ),
-              ],
-            ), //Column
-          ), //Padding
-        ), //SizedBox
-      ),
+                onChanged: (text) {
+                  serialCMD.msgBuffer = text;
+                  print(text);
+                },
+                onEditingComplete: () {
+                  serialCMD.writeToPort();
+                  print('written');
+                },
+              ),
+            ],
+          ), //Column
+        ), //Padding
+      ), //SizedBox
     ); //Card);
   }
 }

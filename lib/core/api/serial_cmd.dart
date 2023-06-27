@@ -28,6 +28,7 @@ class SerialCMD {
 
     await writer.ready;
     await writer.write(Uint8List.fromList('$msgBuffer\r'.codeUnits));
+    print('sending');
 
     await writer.ready;
     await writer.close();
