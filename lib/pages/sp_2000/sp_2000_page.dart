@@ -1,38 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:command_interface/core/widgets/open_port_button.dart';
+import 'package:command_interface/core/widgets/serial_data_display.dart';
+import 'package:command_interface/core/api/serial_port_manager.dart';
 
-class Sp2000Page extends StatelessWidget {
-  const Sp2000Page({super.key});
+class Sp2000Page extends StatefulWidget {
+  const Sp2000Page({Key? key}) : super(key: key);
+
+  @override
+  State<Sp2000Page> createState() => _PumpsPageState();
+}
+
+class _PumpsPageState extends State<Sp2000Page> {
+  final _serialPortManager = SerialPortManager();
+
+  @override
+  void dispose() {
+    _serialPortManager.closePort();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // title: const Text('SP2000'),
-        // centerTitle: true,
-        actions: const <Widget>[
+        actions: [
           Padding(
-              padding: EdgeInsets.only(right: 20.0), child: OpenPortButton()),
+            padding: const EdgeInsets.only(right: 20.0),
+            child: OpenPortButton(
+              serialPortManager: _serialPortManager,  // Pass the SerialPortManager to the button
+              onDataReceived: (data) {
+                // Handle received data here if needed
+                print("Received data: ${String.fromCharCodes(data)}");
+              },
+            ),
+          ),
         ],
       ),
       body: Center(
-          child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-        const SizedBox(height: 30),
-        ElevatedButton(
-          onPressed: () {},
-          child: const Text('Test1'),
-        ),
-        const SizedBox(height: 30),
-        ElevatedButton(
-          onPressed: () {},
-          child: const Text('Test2'),
-        ),
-        const SizedBox(height: 30),
-        ElevatedButton(
-          onPressed: () {},
-          child: const Text('Test3'),
-        ),
-      ])),
+        child: SerialDataDisplay(serialPortManager: _serialPortManager),
+      ),
     );
   }
 }

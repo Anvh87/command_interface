@@ -18,9 +18,10 @@ class MyApp extends StatelessWidget {
       routerConfig: goRouter,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-          brightness: Brightness.light,
-          colorSchemeSeed: Colors.teal,
-          ),
+        useMaterial3: true,
+        brightness: Brightness.light,
+        colorSchemeSeed: Colors.teal,
+      ),
     );
   }
 }
