@@ -26,8 +26,8 @@ class _SerialTextWindowState extends State<SerialTextWindow> {
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.w500,
-                ), //Textstyle
-              ), //Text
+                ),
+              ),
               Expanded(
                 child: ListView(
                   padding: const EdgeInsets.all(8),
@@ -49,9 +49,9 @@ class _SerialTextWindowState extends State<SerialTextWindow> {
                 },
               ),
             ],
-          ), //Column
-        ), //Padding
-      ), //SizedBox
-    ); //Card);
+          ),
+        ),
+      ),
+    );
   }
 }

@@ -9,9 +9,9 @@ class PumpsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Pumps'),
-        centerTitle: true,
-          actions: const <Widget>[
+        // title: const Text('Pumps'),
+        // centerTitle: true,
+        actions: const <Widget>[
     Padding(
       padding: EdgeInsets.only(right: 20.0),
       child: OpenPortButton()

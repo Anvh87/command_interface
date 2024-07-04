@@ -8,8 +8,8 @@ class Sp2000Page extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('SP2000'),
-        centerTitle: true,
+        // title: const Text('SP2000'),
+        // centerTitle: true,
         actions: const <Widget>[
           Padding(
               padding: EdgeInsets.only(right: 20.0), child: OpenPortButton()),
